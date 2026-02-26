@@ -3,7 +3,7 @@
 Interligar toda esteira de desenvolvimento até a entrega na ponta da linha para o cliente. Basicamente é quem cria o pipeline recebendo o código commitado pelos devs, colocando em uma esteira de testes automatizados até finalizar a build e entregar para produção.
 
 
-#Qual a função do SRE?
+# Qual a função do SRE?
 Monitorar o pipeline criado pelo DEVOPS, afim de que a entrega seja confiável e não apresente erros no meio do percurso.
 
 
