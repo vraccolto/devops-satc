@@ -6,7 +6,7 @@ name: Docker Image Check
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "developer" ]
+    branches: [ "developer", "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,3 +38,31 @@ jobs:
 
       - name: docker build
         run: docker build -t ${{secrets.DOCKER_USERNAME}}/satc-devops:0.0.1 .
+
+      - name: Push Docker image
+        run: docker push docker.io/${{secrets.DOCKER_USERNAME}}/satc-devops:0.0.1
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=vraccolto_devops-satc
+            -Dsonar.organization=vraccolto
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=.
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+#      - name: Falhar se houver mais de 2 vulnerabilidades mÃ©dias
+#        run: |
+#          sh ./scripts/sonar_check.sh
+
+#          if [ "$COUNT" -gt 2 ]; then
+#            echo "Pipeline bloqueada: mais de 2 vulnerabilidades mÃ©dias encontradas."
+#            exit 1
+#          fi
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          SONAR_HOST_URL: https://sonarcloud.io
+#          SONAR_PROJECT_KEY: USUARIO
+
