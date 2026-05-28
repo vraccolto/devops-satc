@@ -9,3 +9,4 @@ Monitorar o pipeline criado pelo DEVOPS, afim de que a entrega seja confiável e
 
 
 Em resumo o DEVOPS cria o passo-a-passo do que vai entrar na esteira, sem verificar se todos processos estão corretos, ai entra o SRE para verificar que cada etapa da esteira está rodando sem erros.
+
